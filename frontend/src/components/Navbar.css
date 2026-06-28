@@ -14,6 +14,11 @@
   box-shadow: 4px 0 30px rgba(124, 92, 191, 0.2);
 }
 
+.mobile-topbar,
+.sidebar-overlay {
+  display: none;
+}
+
 /* Cute inner glow circles on sidebar */
 .sidebar::before {
   content: '';
@@ -187,6 +192,7 @@
   padding: 0.75rem 1rem;
   border-top: 1px solid rgba(255,255,255,0.15);
   margin-top: 0.5rem;
+  position: relative;
 }
 
 .logout-btn {
@@ -206,6 +212,12 @@
   border-radius: var(--radius-lg) !important;
   box-shadow: var(--shadow-glow) !important;
   animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: calc(100% + 0.5rem);
+  padding: 0.5rem;
+  z-index: 10;
 }
 
 .user-dropdown-menu button {
@@ -215,13 +227,179 @@
   font-size: 0.875rem !important;
 }
 
+.sidebar-user-button {
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+}
+
+.user-chevron {
+  color: rgba(255,255,255,0.7);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.user-chevron.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-action {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.dropdown-action:hover {
+  transform: none;
+}
+
+.dropdown-danger {
+  color: var(--accent-red);
+}
+
 /* Mobile sidebar */
 @media (max-width: 768px) {
+  .mobile-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--mobile-topbar-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    z-index: 140;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(155, 125, 212, 0.15);
+    box-shadow: 0 8px 24px rgba(124, 92, 191, 0.08);
+  }
+
+  .mobile-menu-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(155, 125, 212, 0.12);
+    border: 1px solid rgba(155, 125, 212, 0.18);
+    color: var(--accent-purple);
+    flex-shrink: 0;
+  }
+
+  .mobile-topbar-brand {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .mobile-logo-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+  }
+
+  .mobile-topbar-copy {
+    min-width: 0;
+  }
+
+  .mobile-topbar-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .mobile-topbar-subtitle {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-user-chip {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-btn);
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(61, 44, 107, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+    z-index: 120;
+    border: none;
+  }
+
+  .sidebar-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
   .sidebar {
+    width: min(86vw, 320px);
     transform: translateX(-100%);
     transition: transform var(--transition-normal);
+    z-index: 130;
   }
+
   .sidebar.open {
     transform: translateX(0);
+  }
+
+  .sidebar-logo {
+    padding-right: 1rem;
+  }
+
+  .sidebar-link:hover {
+    transform: none;
+  }
+
+  .sidebar-user {
+    padding: 1rem 0.25rem 0.25rem;
+  }
+
+  .user-name {
+    max-width: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile-topbar {
+    padding-inline: 0.75rem;
+  }
+
+  .mobile-topbar-title {
+    font-size: 0.9rem;
+  }
+
+  .mobile-topbar-subtitle {
+    font-size: 0.68rem;
   }
 }

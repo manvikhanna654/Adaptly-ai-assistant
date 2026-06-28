@@ -91,7 +91,7 @@ export default function Analytics() {
 
   return (
     <div className="page-container analytics-page">
-      <div className="page-header" style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
+      <div className="page-header analytics-header">
         <div>
           <h1 className="page-title">Analytics &amp; Insights</h1>
           <p className="page-subtitle">Track your learning performance and patterns</p>

@@ -390,3 +390,82 @@
     padding: 0.45rem 0.85rem;
   }
 }
+
+@media (max-width: 900px) {
+  .coach-page {
+    padding-inline: 0;
+  }
+
+  .coach-robot-wrap {
+    height: 320px;
+  }
+
+  .coach-spline-container {
+    width: 540px;
+    height: 540px;
+    transform: translateY(-130px);
+  }
+
+  .coach-msg-bubble {
+    max-width: 88%;
+  }
+}
+
+@media (max-width: 600px) {
+  .coach-page {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .coach-center-card {
+    max-width: 100%;
+  }
+
+  .coach-robot-wrap {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .coach-spline-container {
+    width: 280px;
+    height: 280px;
+    transform: translateY(-48px);
+  }
+
+  .coach-thread {
+    max-height: 42vh;
+    padding: 0.95rem;
+  }
+
+  .coach-msg {
+    gap: 0.55rem;
+  }
+
+  .coach-msg-bubble {
+    max-width: calc(100% - 2.55rem);
+    padding: 0.7rem 0.85rem;
+  }
+
+  .coach-pills {
+    justify-content: stretch;
+  }
+
+  .coach-pill {
+    flex: 1 1 calc(50% - 0.4rem);
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .coach-input-bar {
+    padding-left: 1rem;
+    gap: 0.5rem;
+  }
+
+  .coach-text-input {
+    font-size: 0.85rem;
+  }
+
+  .coach-footer {
+    gap: 0.6rem;
+  }
+}

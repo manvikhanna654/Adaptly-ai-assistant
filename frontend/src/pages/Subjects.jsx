@@ -154,9 +154,9 @@ export default function Subjects() {
           {/* Topics */}
           <div className="form-group" style={{ marginTop: '1rem' }}>
             <label className="form-label">Topics</label>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <div className="topics-list">
               {newSubj.topics.map((t, i) => (
-                <div key={i} style={{ display: 'flex', gap: '0.5rem' }}>
+                <div key={i} className="topic-row">
                   <input className="form-input" placeholder={`Topic ${i + 1}`} value={t.name}
                     onChange={e => {
                       const tops = [...newSubj.topics];
@@ -178,7 +178,7 @@ export default function Subjects() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1.5rem' }}>
+          <div className="subject-form-actions">
             <button className="btn btn-ghost" onClick={() => setShowAdd(false)}>Cancel</button>
             <button id="btn-save-subject" className="btn btn-primary" onClick={handleAdd}>
               <Check size={16} /> Save Subject
@@ -226,7 +226,7 @@ export default function Subjects() {
                       value={editData.difficulty}
                       onChange={e => setEditData(p => ({ ...p, difficulty: Number(e.target.value) }))} />
                   </div>
-                  <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', marginTop: '1rem' }}>
+                  <div className="subject-form-actions compact">
                     <button className="btn btn-ghost btn-sm" onClick={() => setEditId(null)}>
                       <X size={14} /> Cancel
                     </button>
@@ -248,7 +248,7 @@ export default function Subjects() {
                         <Flame size={12} /> {subj.priority_score?.toFixed(1)}
                       </div>
                     </div>
-                    <div style={{ display: 'flex', gap: '0.4rem' }}>
+                    <div className="subject-card-actions">
                       <button className="btn btn-ghost btn-sm" onClick={() => startEdit(subj)}
                         id={`btn-edit-${subj.id}`}><Edit3 size={14} /></button>
                       <button className="btn btn-danger btn-sm" onClick={() => handleDelete(subj.id)}

@@ -112,3 +112,22 @@
   .timer-main-view { height: 50vh; }
   .timer-container-large { transform: scale(1.1); }
 }
+
+@media (max-width: 520px) {
+  .timer-main-view {
+    min-height: 420px;
+    height: auto;
+    padding: 1rem 0.5rem;
+  }
+
+  .timer-container-large {
+    transform: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .timer-sidebar {
+    flex-basis: auto;
+  }
+}

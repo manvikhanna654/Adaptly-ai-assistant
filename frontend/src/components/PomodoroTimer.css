@@ -162,3 +162,25 @@
   transform: scale(1.08);
   transition: transform var(--transition-slow);
 }
+
+@media (max-width: 520px) {
+  .pomodoro-timer {
+    width: 100%;
+    min-width: 0;
+    padding: 1.25rem 1rem 1rem;
+  }
+
+  .pomodoro-ring-wrap {
+    width: 156px;
+    height: 156px;
+  }
+
+  .pomodoro-canvas {
+    width: 156px;
+    height: 156px;
+  }
+
+  .pomodoro-time {
+    font-size: 2.15rem;
+  }
+}

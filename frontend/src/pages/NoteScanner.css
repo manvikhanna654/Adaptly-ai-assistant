@@ -11,6 +11,33 @@
   .scanner-layout { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 640px) {
+  .drag-drop-zone {
+    min-height: 240px;
+  }
+
+  .scanner-results-section {
+    min-height: auto;
+  }
+
+  .flashcards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fc-card {
+    min-height: 200px;
+  }
+
+  .fc-card-inner {
+    min-height: 200px;
+  }
+
+  .fc-card-front,
+  .fc-card-back {
+    padding: 1rem;
+  }
+}
+
 .scanner-upload-section {
   display: flex;
   flex-direction: column;
@@ -79,6 +106,13 @@
 
 .image-preview-container:hover .image-overlay {
   opacity: 1;
+}
+
+.image-overlay > div {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .error-alert {
@@ -631,3 +665,10 @@
 }
 .flip-card-front { background: rgba(255,255,255,0.9); z-index: 2; }
 .flip-card-back { transform: rotateY(180deg); background: var(--gradient-primary); border-color: transparent; color: white; }
+
+@media (max-width: 640px) {
+  .image-overlay > div .btn,
+  .scanner-results-section .section-header .btn {
+    width: 100%;
+  }
+}

@@ -371,11 +371,59 @@
 }
 
 @media (max-width: 640px) {
+  .onboarding-container {
+    gap: 1.25rem;
+    padding-top: 1rem;
+  }
+
+  .step-indicators {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .step-line {
+    width: 48px;
+  }
+
   .form-grid { grid-template-columns: 1fr; }
   .form-grid .form-group[style*="gridColumn"] { grid-column: initial !important; }
   .time-selector { grid-template-columns: repeat(2, 1fr); }
   .onboarding-card { padding: 1.5rem; }
   .onboarding-title { font-size: 2rem; }
+  .card-actions {
+    flex-direction: column-reverse;
+  }
+  .card-actions .btn {
+    width: 100%;
+  }
+  .subject-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .topic-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .comfort-btns,
+  .diff-btns {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .onboarding-page {
+    padding-inline: 0.75rem;
+  }
+
+  .onboarding-title {
+    font-size: 1.75rem;
+  }
+
+  .time-selector {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Diagnostic Quiz ── */

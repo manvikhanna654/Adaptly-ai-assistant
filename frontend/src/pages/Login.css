@@ -558,10 +558,44 @@
   .layout {
     grid-template-columns: 1fr;
     justify-items: center;
+    max-width: 460px;
+    padding: 24px 16px 88px;
   }
 
   .chat-side,
   .features-side {
     display: none;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .login-page-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+  }
+
+  .layout {
+    padding-inline: 12px;
+    padding-bottom: 92px;
+  }
+
+  .card {
+    border-radius: 22px;
+    padding: 28px 20px 24px;
+  }
+
+  .card h1 {
+    font-size: 22px;
+  }
+
+  .social-row {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }

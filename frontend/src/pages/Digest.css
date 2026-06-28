@@ -334,6 +334,22 @@
 
 /* Responsive */
 @media (max-width: 480px) {
+  .digest-greeting {
+    padding-inline: 1rem;
+  }
+
   .digest-recap-grid { grid-template-columns: repeat(2, 1fr); }
   .digest-greeting h1 { font-size: 1.5rem; }
+  .digest-task-item {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .digest-task-time {
+    width: 100%;
+    margin-left: 2rem;
+  }
+  .btn-digest-start {
+    width: 100%;
+    justify-content: center;
+  }
 }

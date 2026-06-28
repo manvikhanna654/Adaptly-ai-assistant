@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import {
   LayoutDashboard, BookOpen, BarChart3, MessageSquare, LogOut,
-  Zap, Brain, Timer, Bot, Scan, RotateCcw, ChevronUp, BrainCircuit
+  Brain, Timer, Bot, Scan, RotateCcw, ChevronUp, BrainCircuit,
+  Menu, X
 } from 'lucide-react';
 import { resetUser } from '../api/client';
 import './Navbar.css';
@@ -22,7 +23,37 @@ const NAV_ITEMS = [
 export default function Navbar() {
   const { user, logout, setUser } = useApp();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const activeItem = useMemo(
+    () => NAV_ITEMS.find((item) => location.pathname.startsWith(item.to)) || NAV_ITEMS[0],
+    [location.pathname]
+  );
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setShowDropdown(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) return undefined;
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMobileOpen(false);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [mobileOpen]);
 
   const handleLogout = () => {
     logout();
@@ -41,71 +72,112 @@ export default function Navbar() {
   };
 
   return (
-    <aside className="sidebar" id="main-sidebar">
-      {/* Logo */}
-      <div className="sidebar-logo">
-        <div className="logo-icon">
-          <Brain size={20} />
-        </div>
-        <div>
-          <div className="logo-text">StudyAI</div>
-          <div className="logo-sub">Adaptive Coach</div>
-        </div>
-      </div>
+    <>
+      <div className="mobile-topbar">
+        <button
+          type="button"
+          className="mobile-menu-btn"
+          aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="main-sidebar"
+          onClick={() => setMobileOpen((open) => !open)}
+        >
+          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
 
-      {/* Navigation */}
-      <nav className="sidebar-nav">
-        {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
-          <NavLink
-            key={to}
-            to={to}
-            className={({ isActive }) =>
-              `sidebar-link ${isActive ? 'active' : ''}`
-            }
-            id={`nav-${label.toLowerCase()}`}
-          >
-            <Icon size={18} />
-            <span>{label}</span>
-          </NavLink>
-        ))}
-      </nav>
+        <div className="mobile-topbar-brand">
+          <div className="logo-icon mobile-logo-icon">
+            <Brain size={18} />
+          </div>
+          <div className="mobile-topbar-copy">
+            <div className="mobile-topbar-title">StudyAI</div>
+            <div className="mobile-topbar-subtitle">{activeItem.label}</div>
+          </div>
+        </div>
 
-      {/* Bottom section dropdown menu */}
-      <div className="sidebar-bottom" style={{ position: 'relative' }}>
-        {user && showDropdown && (
-          <div className="user-dropdown-menu" style={{ position: 'absolute', bottom: '100%', left: '1rem', right: '1rem', marginBottom: '0.5rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: '0.5rem', zIndex: 10, boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-            <button className="sidebar-link text-danger" onClick={handleReset} style={{ color: 'var(--accent-red)', padding: '0.5rem', width: '100%', borderRadius: 'var(--radius-sm)', border: 'none', background: 'transparent', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-              <RotateCcw size={16} />
-              <span>Reset My Data</span>
-            </button>
-            <button className="sidebar-link logout-btn" onClick={handleLogout} style={{ padding: '0.5rem', width: '100%', borderRadius: 'var(--radius-sm)', border: 'none', background: 'transparent', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', color: 'var(--text-primary)' }}>
-              <LogOut size={16} />
-              <span>Sign Out</span>
-            </button>
+        {user && (
+          <div className="mobile-user-chip" aria-hidden="true">
+            {user.email?.charAt(0).toUpperCase()}
           </div>
         )}
-        
-        {user && (
-          <button 
-            className="sidebar-user" 
-            style={{ width: '100%', background: 'transparent', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', outline: 'none' }} 
-            onClick={() => setShowDropdown(!showDropdown)}
-          >
-            <div className="user-avatar">
-              {user.email?.charAt(0).toUpperCase()}
-            </div>
-            <div className="user-info" style={{ textAlign: 'left', flex: 1 }}>
-              <div className="user-name" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '120px' }}>
-                 {user.name || user.email}
-              </div>
-              <div className="user-role" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                 {user.email}
-              </div>
-            </div>
-            <ChevronUp size={16} style={{ color: 'var(--text-muted)', transform: showDropdown ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-          </button>
-        )}
       </div>
-    </aside>
+
+      <button
+        type="button"
+        className={`sidebar-overlay ${mobileOpen ? 'visible' : ''}`}
+        aria-label="Close navigation overlay"
+        onClick={() => setMobileOpen(false)}
+      />
+
+      <aside className={`sidebar ${mobileOpen ? 'open' : ''}`} id="main-sidebar">
+        {/* Logo */}
+        <div className="sidebar-logo">
+          <div className="logo-icon">
+            <Brain size={20} />
+          </div>
+          <div>
+            <div className="logo-text">StudyAI</div>
+            <div className="logo-sub">Adaptive Coach</div>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="sidebar-nav">
+          {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={({ isActive }) =>
+                `sidebar-link ${isActive ? 'active' : ''}`
+              }
+              id={`nav-${label.toLowerCase()}`}
+              onClick={() => setMobileOpen(false)}
+            >
+              <Icon size={18} />
+              <span>{label}</span>
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Bottom section dropdown menu */}
+        <div className="sidebar-bottom">
+          {user && showDropdown && (
+            <div className="user-dropdown-menu">
+              <button className="sidebar-link dropdown-action dropdown-danger" onClick={handleReset}>
+                <RotateCcw size={16} />
+                <span>Reset My Data</span>
+              </button>
+              <button className="sidebar-link dropdown-action" onClick={handleLogout}>
+                <LogOut size={16} />
+                <span>Sign Out</span>
+              </button>
+            </div>
+          )}
+
+          {user && (
+            <button
+              className="sidebar-user sidebar-user-button"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              <div className="user-avatar">
+                {user.email?.charAt(0).toUpperCase()}
+              </div>
+              <div className="user-info">
+                <div className="user-name">
+                  {user.name || user.email}
+                </div>
+                <div className="user-role">
+                  {user.email}
+                </div>
+              </div>
+              <ChevronUp
+                size={16}
+                className={`user-chevron ${showDropdown ? 'open' : ''}`}
+              />
+            </button>
+          )}
+        </div>
+      </aside>
+    </>
   );
 }

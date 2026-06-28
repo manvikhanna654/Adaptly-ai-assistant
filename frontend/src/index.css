@@ -83,6 +83,7 @@
   --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --sidebar-width: 268px;
+  --mobile-topbar-height: 72px;
 }
 
 *, *::before, *::after {
@@ -172,6 +173,7 @@ input, select, textarea { outline: none; font-family: var(--font-primary); }
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
+  width: 100%;
 }
 
 /* ── Glass Cards ── */
@@ -214,6 +216,7 @@ input, select, textarea { outline: none; font-family: var(--font-primary); }
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.65rem 1.35rem;
   border-radius: var(--radius-full);
@@ -222,6 +225,8 @@ input, select, textarea { outline: none; font-family: var(--font-primary); }
   transition: all var(--transition-bounce);
   font-family: var(--font-primary);
   letter-spacing: 0.01em;
+  text-align: center;
+  flex-wrap: wrap;
 }
 
 .btn-primary {
@@ -495,6 +500,7 @@ input, select, textarea { outline: none; font-family: var(--font-primary); }
   gap: 0.75rem;
   animation: slideInLeft 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   min-width: 300px;
+  max-width: min(92vw, 380px);
   color: var(--text-primary);
 }
 
@@ -553,6 +559,8 @@ input, select, textarea { outline: none; font-family: var(--font-primary); }
   padding: 2.25rem;
   width: 100%;
   max-width: 500px;
+  max-height: min(90vh, 720px);
+  overflow-y: auto;
   box-shadow: 0 24px 80px rgba(124, 92, 191, 0.2);
   animation: fadeInUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -585,7 +593,45 @@ input, select, textarea { outline: none; font-family: var(--font-primary); }
 @media (max-width: 768px) {
   :root { --sidebar-width: 0px; }
   .main-content { margin-left: 0; }
+  .main-content { padding-top: var(--mobile-topbar-height); min-height: calc(100vh - var(--mobile-topbar-height)); }
   .page-container { padding: 1rem; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .page-title { font-size: 1.5rem; }
+  .page-subtitle { font-size: 0.9rem; }
+  .glass-card { padding: 1.15rem; }
+  .toast-container {
+    top: calc(var(--mobile-topbar-height) + 0.75rem);
+    right: 0.75rem;
+    left: 0.75rem;
+  }
+  .toast {
+    min-width: 0;
+    width: 100%;
+  }
+  .modal {
+    padding: 1.35rem;
+    border-radius: var(--radius-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  body::before {
+    width: 320px;
+    height: 320px;
+    right: -25%;
+  }
+
+  body::after {
+    width: 280px;
+    height: 280px;
+    left: -20%;
+  }
+
+  .page-container {
+    padding: 0.875rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
 }

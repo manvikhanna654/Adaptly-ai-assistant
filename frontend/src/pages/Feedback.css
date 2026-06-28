@@ -218,8 +218,32 @@
 }
 
 @media (max-width: 640px) {
+  .filters-bar {
+    align-items: stretch;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .filter-select {
+    min-width: 0;
+    width: 100%;
+  }
+
   .ftask-header { flex-direction: column; }
   .fb-row { flex-direction: column; align-items: flex-start; }
   .diff-scale { gap: 0.25rem; }
   .diff-scale-btn { font-size: 0.68rem; }
+  .status-toggle {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .toggle-btn {
+    flex: 1 1 calc(50% - 0.25rem);
+    justify-content: center;
+  }
+  .fb-number {
+    width: 100%;
+  }
 }

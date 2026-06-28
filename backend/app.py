@@ -24,9 +24,15 @@ import bcrypt
 import sqlite3
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"])
-app.config['JWT_SECRET_KEY'] = 'adaptive-study-coach-super-secret'
-jwt = JWTManager(app)
+CORS(
+    app,
+    origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:5173",
+        "https://adaptly-frontend.vercel.app"
+    ]
+)
 
 # Initialize database on startup
 init_db()

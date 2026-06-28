@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = '/api';
+const BASE_URL = 'https://adaptly-ai-assistant.onrender.com';
 
 const api = axios.create({
   baseURL: BASE_URL,
