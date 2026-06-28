@@ -1,0 +1,339 @@
+/* ── Digest Page ── Cute lavender theme ── */
+
+.digest-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-page);
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 1rem;
+}
+
+.digest-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.digest-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.28;
+}
+
+.digest-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(196, 176, 240, 0.6), transparent);
+  top: -100px;
+  left: -100px;
+  animation: blobFloat 8s ease-in-out infinite;
+}
+
+.digest-orb-2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(244, 143, 177, 0.5), transparent);
+  bottom: -100px;
+  right: -80px;
+  animation: blobFloat 10s ease-in-out infinite reverse;
+}
+
+.digest-container {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.digest-loading {
+  color: var(--accent-purple);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Greeting */
+.digest-greeting {
+  text-align: center;
+  padding: 2.25rem 1.5rem 1.75rem;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(196, 176, 240, 0.35);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-glow);
+  animation: fadeInUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.digest-logo {
+  color: var(--accent-purple);
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: center;
+  animation: heartbeat 2.5s ease-in-out infinite;
+}
+
+.digest-greeting h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.25rem;
+}
+
+.digest-date {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 0.875rem;
+  font-weight: 500;
+}
+
+.digest-streak-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 183, 77, 0.15);
+  border: 1.5px solid rgba(255, 183, 77, 0.3);
+  color: #e65100;
+  padding: 5px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  animation: floatUp 3s ease-in-out infinite;
+}
+
+/* Section */
+.digest-section {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 1.35rem;
+  box-shadow: var(--shadow-card);
+  animation: fadeInUp 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.digest-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--accent-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+/* Recap Grid */
+.digest-recap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.digest-recap-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.recap-val {
+  font-size: 1.5rem;
+  font-weight: 900;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: var(--font-display);
+}
+
+.recap-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Task list */
+.digest-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.digest-empty {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.digest-task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  background: rgba(196, 176, 240, 0.08);
+  border-radius: var(--radius-lg);
+  font-size: 0.88rem;
+  transition: all var(--transition-bounce);
+}
+
+.digest-task-item:hover {
+  background: rgba(196, 176, 240, 0.18);
+  transform: translateX(4px);
+}
+
+.digest-task-num {
+  width: 24px;
+  height: 24px;
+  background: rgba(155, 125, 212, 0.15);
+  border-radius: 50%;
+  color: var(--accent-purple);
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.digest-task-name {
+  color: var(--text-primary);
+  font-weight: 700;
+  flex: 1;
+}
+
+.digest-task-topic {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.digest-task-time {
+  color: var(--accent-purple);
+  font-weight: 700;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+/* Insight in digest */
+.digest-insight.insight-urgent {
+  border-color: rgba(239,83,80,0.25);
+  background: rgba(255, 235, 238, 0.6);
+}
+.digest-insight.insight-warning {
+  border-color: rgba(255,183,77,0.3);
+  background: rgba(255, 243, 224, 0.6);
+}
+.digest-insight.insight-success {
+  border-color: rgba(102,187,106,0.3);
+  background: rgba(232, 245, 233, 0.6);
+}
+
+.digest-insight-body {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.digest-insight-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Exam chips */
+.digest-exam-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.exam-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(155,125,212,0.12);
+  border: 1.5px solid rgba(155,125,212,0.25);
+  color: var(--accent-purple);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: all var(--transition-bounce);
+}
+
+.exam-chip:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
+}
+
+.exam-chip.urgent {
+  background: rgba(239,83,80,0.1);
+  border-color: rgba(239,83,80,0.3);
+  color: var(--accent-red);
+}
+
+.exam-chip-days {
+  color: inherit;
+  opacity: 0.7;
+}
+
+/* CTA */
+.digest-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-digest-start {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--gradient-primary);
+  color: #fff;
+  border: none;
+  padding: 1rem 2.25rem;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: all var(--transition-bounce);
+  box-shadow: var(--shadow-btn);
+  letter-spacing: 0.01em;
+}
+
+.btn-digest-start:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 36px rgba(124, 92, 191, 0.5);
+}
+
+/* Animations */
+.animate-fade-up {
+  animation: fadeInUp 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .digest-recap-grid { grid-template-columns: repeat(2, 1fr); }
+  .digest-greeting h1 { font-size: 1.5rem; }
+}

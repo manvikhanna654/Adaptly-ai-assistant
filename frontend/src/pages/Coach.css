@@ -1,0 +1,392 @@
+/* ══════════════════════════════════════════════════
+   Coach Page — Premium AI Assistant Layout
+   Inspired by KittyTalk · Lavender / Purple tones
+   ══════════════════════════════════════════════════ */
+
+/* ── Page wrapper ── */
+.coach-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100%;
+  padding: 2rem 1rem 4rem;
+}
+
+/* ── Center card ── */
+.coach-center-card {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ── Aiva Intro ── */
+.coach-aiva-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  animation: fadeInUp 0.45s ease both;
+}
+
+.coach-aiva-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(155, 125, 212, 0.15), rgba(196, 176, 240, 0.12));
+  border: 1.5px solid rgba(155, 125, 212, 0.25);
+  color: var(--accent-purple, #8b7cf8);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.coach-aiva-tagline {
+  font-size: 1rem;
+  color: var(--text-secondary, #666);
+  text-align: center;
+  margin: 0;
+  font-weight: 400;
+}
+
+.coach-aiva-tagline strong {
+  color: var(--accent-purple, #8b7cf8);
+  font-weight: 700;
+}
+
+/* ── Greeting & Heading ── */
+.coach-greeting {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.01em;
+  animation: fadeInUp 0.5s ease both;
+}
+
+.coach-heading {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+  animation: fadeInUp 0.55s ease both;
+  animation-delay: 0.05s;
+}
+
+/* ── Robot Hero Section ── */
+.coach-robot-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  /* Only show the robot portion, not all the empty Spline canvas space */
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  animation: fadeInUp 0.6s ease both;
+  animation-delay: 0.1s;
+}
+
+/* Spline container — sits on top of rings */
+.coach-spline-container {
+  position: relative;
+  z-index: 2;
+  width: 680px;
+  height: 680px;
+  flex-shrink: 0;
+  /* Shift the canvas UP so the robot fills the cropped window */
+  transform: translateY(-160px);
+  /* Gradient mask fades out the grey floor at the bottom */
+  -webkit-mask-image: linear-gradient(to bottom,
+      black 0%,
+      black 60%,
+      transparent 85%);
+  mask-image: linear-gradient(to bottom,
+      black 0%,
+      black 60%,
+      transparent 85%);
+}
+
+/* ── Quick Start Pills ── */
+.coach-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.65s ease both;
+  animation-delay: 0.15s;
+}
+
+.coach-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-medium, rgba(155, 125, 212, 0.25));
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--text-secondary, #555);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-primary, 'Inter', sans-serif);
+  backdrop-filter: blur(8px);
+}
+
+.coach-pill:hover:not(:disabled) {
+  background: rgba(155, 125, 212, 0.1);
+  border-color: var(--accent-purple, #8b7cf8);
+  color: var(--accent-purple, #8b7cf8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(155, 125, 212, 0.15);
+}
+
+.coach-pill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Chat Thread ── */
+.coach-thread {
+  width: 100%;
+  max-height: 36vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(155, 125, 212, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(155, 125, 212, 0.08);
+  animation: fadeInUp 0.4s ease both;
+  scroll-behavior: smooth;
+}
+
+.coach-thread::-webkit-scrollbar {
+  width: 4px;
+}
+
+.coach-thread::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.coach-thread::-webkit-scrollbar-thumb {
+  background: rgba(155, 125, 212, 0.3);
+  border-radius: 99px;
+}
+
+/* ── Individual chat message ── */
+.coach-msg {
+  display: flex;
+  gap: 0.75rem;
+  animation: fadeInUp 0.3s ease both;
+}
+
+.coach-msg.user {
+  flex-direction: row-reverse;
+}
+
+.coach-msg-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: rgba(155, 125, 212, 0.12);
+  color: var(--accent-purple, #8b7cf8);
+  font-size: 0.8rem;
+}
+
+.coach-msg.user .coach-msg-avatar {
+  background: rgba(100, 160, 255, 0.12);
+  color: #5b8def;
+}
+
+.coach-msg-bubble {
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(155, 125, 212, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.coach-msg.user .coach-msg-bubble {
+  background: linear-gradient(135deg, rgba(155, 125, 212, 0.1), rgba(196, 176, 240, 0.08));
+  border-color: rgba(155, 125, 212, 0.2);
+}
+
+.coach-msg-role {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted, #888);
+  margin-bottom: 0.3rem;
+}
+
+.coach-msg-text {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-primary, #1a1a2e);
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.coach-typing {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted, #999);
+}
+
+/* ── Input bar ── */
+.coach-input-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(155, 125, 212, 0.2);
+  border-radius: 999px;
+  padding: 0.55rem 0.55rem 0.55rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(155, 125, 212, 0.1);
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeInUp 0.7s ease both;
+  animation-delay: 0.2s;
+}
+
+.coach-input-bar:focus-within {
+  border-color: var(--accent-purple, #8b7cf8);
+  box-shadow: 0 4px 24px rgba(155, 125, 212, 0.2);
+}
+
+.coach-text-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-primary, 'Inter', sans-serif);
+  font-size: 0.9rem;
+  color: var(--text-primary, #1a1a2e);
+  padding: 0;
+}
+
+.coach-text-input::placeholder {
+  color: var(--text-muted, #aaa);
+}
+
+.coach-send-btn {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #9b7dd4, #c4b0f0);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.coach-send-btn:hover:not(:disabled) {
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(155, 125, 212, 0.4);
+}
+
+.coach-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Footer hint ── */
+.coach-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.75s ease both;
+  animation-delay: 0.25s;
+}
+
+.coach-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--text-muted, #aaa);
+}
+
+.coach-clear-btn {
+  font-size: 0.78rem;
+  color: var(--text-muted, #bbb);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+  font-family: var(--font-primary, 'Inter', sans-serif);
+}
+
+.coach-clear-btn:hover {
+  color: var(--accent-purple, #8b7cf8);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .coach-robot-wrap {
+    width: 240px;
+    height: 240px;
+  }
+
+  .coach-spline-container {
+    width: 220px;
+    height: 220px;
+  }
+
+  .ring-2 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .ring-3 {
+    width: 240px;
+    height: 240px;
+  }
+
+  .coach-heading {
+    font-size: 1.4rem;
+  }
+
+  .coach-pills {
+    gap: 0.4rem;
+  }
+
+  .coach-pill {
+    font-size: 0.78rem;
+    padding: 0.45rem 0.85rem;
+  }
+}
