@@ -24,14 +24,12 @@ import bcrypt
 import sqlite3
 
 app = Flask(__name__)
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'change-this-in-production')
+jwt = JWTManager(app)
+
 CORS(
     app,
-    origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:5173",
-        "https://adaptly-frontend.vercel.app"
-    ]
+    origins="*"
 )
 
 # Initialize database on startup
