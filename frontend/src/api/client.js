@@ -1,13 +1,9 @@
 import axios from 'axios';
 
-const rawBaseUrl =
-  import.meta.env.VITE_API_URL ||
-  'http://localhost:5000/api';
-
-const normalizedBaseUrl = rawBaseUrl.replace(/\/+$/, '');
-const BASE_URL = normalizedBaseUrl.endsWith('/api')
-  ? normalizedBaseUrl
-  : `${normalizedBaseUrl}/api`;
+// Use environment variable if set, otherwise fall back to the Render backend
+const BASE_URL = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL.replace(/\/+$/, '').replace(/\/api$/, '') + '/api'
+  : 'https://adaptly-ai-assistant.onrender.com/api';
 
 const api = axios.create({
   baseURL: BASE_URL,
