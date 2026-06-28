@@ -38,6 +38,13 @@ def current_user_id():
 # ─────────────────────────────────────────────
 # AUTH ROUTES
 # ─────────────────────────────────────────────
+@app.route("/")
+def home():
+    return {
+        "status": "Backend is running successfully!",
+        "message": "Welcome to Adaptly AI Assistant API 🚀"
+    }
+
 
 @app.route('/api/auth/register', methods=['POST'])
 def register():
